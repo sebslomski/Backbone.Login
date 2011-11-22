@@ -4,6 +4,7 @@ class exports.MainRouter extends Backbone.Router
         'secret': 'secret'
         'secret2': 'secret2'
         'login': 'login'
+        'sec/:id': 'secretId'
 
 
     init: ->
@@ -12,13 +13,13 @@ class exports.MainRouter extends Backbone.Router
 
     login: ->
         # implement your login functianality here
-        Backbone.Login.loggedIn = true
         Backbone.Login.from = 'secret'
         $button = $('<button>Logged in. continue to secret</button>')
         $button.click((e) =>
+            Backbone.Login.loggedIn = true
             @navigate(Backbone.Login.from, true)
         )
-        $('body').html($button)
+        $('#content').html($button)
 
 
     secret: ->
@@ -26,8 +27,12 @@ class exports.MainRouter extends Backbone.Router
         $button.click((e) =>
             @navigate('secret2', true)
         )
-        $('body').html($button)
+        $('#content').html($button)
 
 
     secret2: ->
-        $('body').html('secret2')
+        $('#content').html('secret2')
+
+
+    secretId: (id) ->
+        $('#content').html('secret with id: ' + id)
